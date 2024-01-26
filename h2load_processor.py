@@ -54,7 +54,7 @@ import re
 import sys
 from statistics import mean, median, pstdev, quantiles
 
-h2load_row_re = re.compile(r'^(\d+)\s+(\d+)\s+(\d+)$')
+h2load_row_re = re.compile(r'^(\d+)\s+(\-?\d+)\s+(\d+)$')
 
 
 def main():
