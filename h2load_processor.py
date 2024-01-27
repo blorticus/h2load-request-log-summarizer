@@ -134,7 +134,7 @@ def main():
     moving_tps_mean, moving_tps_median, moving_tps_stdev = round(mean(moving_tps_list), 1), round(median(moving_tps_list), 1), round(pstdev(moving_tps_list), 1)
 
     print(
-        "type,key,totalRequests,successfulRequests,failurePercentage," +
+        "type,key,totalRequests,successfulRequests,failedRequests," +
         "ttlbMean,ttlbMedian,ttlbStdev,ttlb5thPercentile,ttlb95thPercentile," +
         "aggregateTPS,movingTPSMean,movingTPSMedian,movingTPSStdev",
         file=output_file_handle
@@ -150,7 +150,7 @@ def generate_summary_line(key_type: str, key: str, total_requests: int, successf
                         aggregate_tps: float, moving_tps_mean: float, moving_tps_median: float, moving_tps_stdev: float) -> str:
     '''Generate a line (without trailing newline) of comma-separated records matching the columns in the header line.'''
     return ",".join([
-        key_type, key, str(total_requests), str(successful_requests), str(round(successful_requests / total_requests * 100, 2)),
+        key_type, key, str(total_requests), str(successful_requests), str(total_requests - successful_requests),
         str(ttlb_mean), str(ttlb_median), str(ttlb_stdev), str(ttlb_5th), str(ttlb_95th),
         str(aggregate_tps), str(moving_tps_mean), str(moving_tps_median), str(moving_tps_stdev)
     ])
